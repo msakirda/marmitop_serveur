@@ -45,6 +45,10 @@ const Recette = sequelize.define('recettes', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  comment: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 }, {});
 
 main(sequelize);
@@ -53,10 +57,11 @@ interface IMaRequetBody {
   duree: Number,
   url: string,
   note: Number,
+  comment: string,
 }
 // Route pour ajouter une recette
 app.post('/recettes', async (req:Request<IMaRequetBody>, res) => {
-  const recette = await Recette.create({ nom: req.body.nom, duree: req.body.duree, lienimage: req.body.url, note: req.body.note });
+  const recette = await Recette.create({ nom: req.body.nom, duree: req.body.duree, lienimage: req.body.url, note: req.body.note, comment: req.body.comment});
   res.json(recette);
 });
 
